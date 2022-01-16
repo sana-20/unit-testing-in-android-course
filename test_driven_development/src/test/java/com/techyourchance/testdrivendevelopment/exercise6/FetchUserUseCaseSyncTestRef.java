@@ -18,6 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -47,8 +48,7 @@ public class FetchUserUseCaseSyncTestRef {
     public void setup() throws Exception {
         mFetchUserHttpEndpointSyncTestDouble = new FetchUserHttpEndpointSyncTestDouble();
 
-        // TODO: assign your implementation of FetchUserUseCaseSync to SUT
-        // SUT = new FetchUserUseCaseSyncImpl(mFetchUserHttpEndpointSyncTestDouble, mUsersCacheMock);
+        SUT = new FetchUserUseCaseSyncImpl(mFetchUserHttpEndpointSyncTestDouble, mUsersCacheMock);
 
         userNotInCache();
         endpointSuccess();
@@ -86,7 +86,7 @@ public class FetchUserUseCaseSyncTestRef {
         // Arrange
         ArgumentCaptor<User> ac = ArgumentCaptor.forClass(User.class);
         // Act
-        UseCaseResult result = SUT.fetchUserSync(USER_ID);
+        SUT.fetchUserSync(USER_ID);
         // Assert
         verify(mUsersCacheMock).cacheUser(ac.capture());
         assertThat(ac.getValue(), is(USER));
@@ -187,7 +187,7 @@ public class FetchUserUseCaseSyncTestRef {
         // Arrange
         ArgumentCaptor<String> ac = ArgumentCaptor.forClass(String.class);
         // Act
-        UseCaseResult result = SUT.fetchUserSync(USER_ID);
+        SUT.fetchUserSync(USER_ID);
         // Assert
         verify(mUsersCacheMock).getUser(ac.capture());
         assertThat(ac.getValue(), is(USER_ID));

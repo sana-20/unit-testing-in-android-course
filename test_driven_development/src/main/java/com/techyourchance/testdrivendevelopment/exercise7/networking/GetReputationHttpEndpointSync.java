@@ -27,6 +27,6 @@ public interface GetReputationHttpEndpointSync {
         }
     }
 
-    EndpointResult getReputationSync();
+    EndpointResult getReputationSync() throws NetworkErrorException;
 
 }

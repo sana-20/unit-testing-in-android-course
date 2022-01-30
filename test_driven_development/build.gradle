@@ -4,7 +4,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:2.28.2'
-    compile 'org.jetbrains:annotations-java5:15.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }
 
 sourceCompatibility = "1.7"

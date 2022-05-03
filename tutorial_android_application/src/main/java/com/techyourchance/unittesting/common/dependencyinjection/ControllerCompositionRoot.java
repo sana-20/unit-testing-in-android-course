@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 
+import com.techyourchance.unittesting.common.time.TimeProvider;
 import com.techyourchance.unittesting.networking.StackoverflowApi;
 import com.techyourchance.unittesting.networking.questions.FetchLastActiveQuestionsEndpoint;
 import com.techyourchance.unittesting.networking.questions.FetchQuestionDetailsEndpoint;
@@ -17,6 +18,7 @@ import com.techyourchance.unittesting.screens.common.fragmentframehelper.Fragmen
 import com.techyourchance.unittesting.screens.common.navdrawer.NavDrawerHelper;
 import com.techyourchance.unittesting.screens.common.screensnavigator.ScreensNavigator;
 import com.techyourchance.unittesting.screens.common.toastshelper.ToastsHelper;
+import com.techyourchance.unittesting.screens.questiondetails.QuestionDetailsController;
 import com.techyourchance.unittesting.screens.questionslist.QuestionsListController;
 
 public class ControllerCompositionRoot {
@@ -49,10 +51,6 @@ public class ControllerCompositionRoot {
         return new FetchLastActiveQuestionsEndpoint(getStackoverflowApi());
     }
 
-    private FetchQuestionDetailsEndpoint getFetchQuestionDetailsEndpoint() {
-        return new FetchQuestionDetailsEndpoint(getStackoverflowApi());
-    }
-
     private LayoutInflater getLayoutInflater() {
         return LayoutInflater.from(getContext());
     }
@@ -66,19 +64,23 @@ public class ControllerCompositionRoot {
     }
 
     public FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase() {
-        return new FetchQuestionDetailsUseCase(getFetchQuestionDetailsEndpoint());
+        return mCompositionRoot.getFetchQuestionDetailsUseCase();
     }
 
     public FetchLastActiveQuestionsUseCase getFetchLastActiveQuestionsUseCase() {
         return new FetchLastActiveQuestionsUseCase(getFetchLastActiveQuestionsEndpoint());
     }
 
+    public TimeProvider getTimeProvider() {
+        return mCompositionRoot.getTimeProvider();
+    }
+
     public QuestionsListController getQuestionsListController() {
         return new QuestionsListController(
                 getFetchLastActiveQuestionsUseCase(),
                 getScreensNavigator(),
-                getToastsHelper()
-        );
+                getToastsHelper(),
+                getTimeProvider());
     }
 
     public ToastsHelper getToastsHelper() {
@@ -99,5 +101,9 @@ public class ControllerCompositionRoot {
 
     public BackPressDispatcher getBackPressDispatcher() {
         return (BackPressDispatcher) getActivity();
+    }
+
+    public QuestionDetailsController getQuestionDetailsController() {
+        return new QuestionDetailsController(getFetchQuestionDetailsUseCase(), getScreensNavigator(), getToastsHelper());
     }
 }

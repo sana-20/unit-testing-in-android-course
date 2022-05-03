@@ -13,6 +13,7 @@ import com.techyourchance.unittesting.screens.common.controllers.BaseFragment;
 import com.techyourchance.unittesting.screens.common.screensnavigator.ScreensNavigator;
 import com.techyourchance.unittesting.screens.common.toastshelper.ToastsHelper;
 
+
 public class QuestionDetailsFragment extends BaseFragment {
 
     private static final String ARG_QUESTION_ID = "ARG_QUESTION_ID";

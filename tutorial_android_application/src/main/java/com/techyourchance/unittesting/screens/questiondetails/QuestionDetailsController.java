@@ -33,7 +33,6 @@ public class QuestionDetailsController implements QuestionDetailsViewMvc.Listene
     public void onStart() {
         mViewMvc.registerListener(this);
         mFetchQuestionDetailsUseCase.registerListener(this);
-
         mViewMvc.showProgressIndication();
         mFetchQuestionDetailsUseCase.fetchQuestionDetailsAndNotify(mQuestionId);
     }

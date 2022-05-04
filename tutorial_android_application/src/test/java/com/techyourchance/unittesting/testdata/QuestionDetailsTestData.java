@@ -1,14 +1,14 @@
 package com.techyourchance.unittesting.testdata;
 
-import com.techyourchance.unittesting.questions.Question;
 import com.techyourchance.unittesting.questions.QuestionDetails;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class QuestionDetailsTestData {
 
-    public static QuestionDetails getQuestionDetails() {
-        return new QuestionDetails("id", "title", "body");
+    public static QuestionDetails getQuestionDetails1() {
+        return new QuestionDetails("id1", "title1", "body1");
+    }
+
+    public static QuestionDetails getQuestionDetails2() {
+        return new QuestionDetails("id2", "title2", "body2");
     }
 }
